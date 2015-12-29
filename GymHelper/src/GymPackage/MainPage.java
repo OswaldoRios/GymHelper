@@ -16,33 +16,35 @@ import javax.swing.JFrame;
  * @author ozzIE
  */
 public class MainPage extends javax.swing.JFrame {
+    
+        
 
-    /**
-     * Creates new form MainPage
-     */
     public MainPage() {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(getParent());
+        int text1 = Integer.parseInt(jTextField1.getText());
+        int text2 = Integer.parseInt(jTextField2.getText());
+
         jTextField1.addMouseListener(new MouseAdapter() {
-        @Override
-        public void mousePressed(MouseEvent e)           
-        {
-        if(jTextField1.getText().equals("Ingresar Numero De Cliente"))
-          jTextField1.setText(" "); 
-          jTextField1.setForeground(Color.black);
-        }
-        
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (jTextField1.getText().equals("Ingresar Numero De Cliente")) {
+                    jTextField1.setText(" ");
+                }
+                jTextField1.setForeground(Color.black);
+            }
+
         });
         jTextField2.addMouseListener(new MouseAdapter() {
-        @Override
-        public void mousePressed(MouseEvent e)           
-        {
-        if(jTextField2.getText().equals("Ingresar Numero De Cliente"))
-          jTextField2.setText(" "); 
-          jTextField2.setForeground(Color.black);
-        }
-        
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (jTextField2.getText().equals("Ingresar Numero De Cliente")) {
+                    jTextField2.setText(" ");
+                }
+                jTextField2.setForeground(Color.black);
+            }
+
         });
     }
 
@@ -119,7 +121,7 @@ public class MainPage extends javax.swing.JFrame {
 
         jLabel3.setText("Aqui Podras Registrar Un Pago");
 
-        jTextField2.setForeground(new java.awt.Color(153, 153, 153));
+        jTextField2.setForeground(new java.awt.Color(102, 102, 102));
         jTextField2.setText("Ingresar Numero De Cliente");
 
         jButton6.setText("Realizar Pago");
@@ -191,7 +193,7 @@ public class MainPage extends javax.swing.JFrame {
         jButton3.setBackground(new java.awt.Color(204, 0, 0));
         jButton3.setText("Borrar Cliente");
 
-        jTextField1.setForeground(new java.awt.Color(153, 153, 153));
+        jTextField1.setForeground(new java.awt.Color(102, 102, 102));
         jTextField1.setText("Ingresar Numero De Cliente");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,11 +259,15 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        Pagos payment = new Pagos();
+
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        Pagos payment = new Pagos();
+
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -276,6 +282,8 @@ public class MainPage extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -307,7 +315,7 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
     }
-
+     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
