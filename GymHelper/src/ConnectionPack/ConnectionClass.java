@@ -3,7 +3,8 @@ package ConnectionPack;
 
 
 import java.sql.*;
-
+import java.io.*;
+import javax.swing.*;
 
 public class ConnectionClass {
 
@@ -11,15 +12,15 @@ public class ConnectionClass {
     static Statement st = null;
     static ResultSet rs = null;
 
-    //static String bd = "orcl";
-    static String login = "hr";
+    
+    static String usrname = "hr";
     static String password = "hr";
     static String url = "jdbc:oracle:thin:@localhost:1521:xe";
 
     public static Connection Enlace(Connection conn) throws SQLException {
         try {
             Class.forName("oracle.jdbc.OracleDriver");
-            conn = DriverManager.getConnection(url, login, password);
+            conn = DriverManager.getConnection(url, usrname, password);
             System.out.println("Successful Connection!\n");
         } catch (ClassNotFoundException e) {
             System.out.print("Connection Failed\n");
@@ -35,11 +36,13 @@ public class ConnectionClass {
 
     public static ResultSet EnlEst(ResultSet rs) throws SQLException {
         st = sta(st);
-        rs = st.executeQuery("select * from autores");
+        rs = st.executeQuery("select * from countries");
         return rs;
     }
 
     public static void main(String[] args) throws SQLException {
         Enlace(conn);
     }
+    
+    
 }

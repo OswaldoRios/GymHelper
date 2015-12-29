@@ -9,6 +9,9 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JFrame;
 
 /**
@@ -16,15 +19,16 @@ import javax.swing.JFrame;
  * @author ozzIE
  */
 public class MainPage extends javax.swing.JFrame {
-    
+        static Connection conn = null;
+        static Statement st = null;
+        static ResultSet rs = null;
         
 
     public MainPage() {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(getParent());
-        int text1 = Integer.parseInt(jTextField1.getText());
-        int text2 = Integer.parseInt(jTextField2.getText());
+        
 
         jTextField1.addMouseListener(new MouseAdapter() {
             @Override
@@ -271,7 +275,9 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        NewCustomer newcust = new NewCustomer();
+        newcust.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed

@@ -5,6 +5,12 @@
  */
 package GymPackage;
 
+import ConnectionPack.ConnectionClass;
+import static GymPackage.MainPage.conn;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author ozzIE
@@ -20,12 +26,51 @@ public class Customers {
 
     public Customers() {
         
-        
+     
         
         
     }
     
-    
+  public void BorrarCliente()
+          
+  {
+      
+    /*   int a;
+       a=Integer.parseInt(JOptionPane.showInputDialog("Ingrese ID del contacto que quiere borrar"));
+          try {
+            
+            ConnectionPack.ConnectionClass miconexion = new ConnectionPack.ConnectionClass();
+            conn = ConnectionClass.Enlace(conn);
+            String sqlinsertar = "delete from CLIENTE WHERE id_cliente = ?";
+            PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+            psta.setInt(1, a);
+            psta.execute();
+            psta.close();
+            JOptionPane.showMessageDialog(null, "Registro Modificado Borrado");
+        } catch (Exception e) {
+            System.out.println(e.getCause());
+        }
+      
+    */  
+  }
+  
+  public void ClienteNuevo()
+          
+  {
+  
+      System.out.println("testing out adding new client");
+      
+      
+  
+  
+  
+  }
+          
+         
+  
+  
+  
+  
     
     
     
