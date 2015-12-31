@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -23,7 +24,7 @@ public class MainPage extends javax.swing.JFrame {
         static Connection conn = null;
         static Statement st = null;
         static ResultSet rs = null;
-        
+        public String M;
 
     public MainPage() {
         initComponents();
@@ -35,7 +36,7 @@ public class MainPage extends javax.swing.JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (jTextField1.getText().equals("Ingresar Numero De Cliente")) {
-                    jTextField1.setText(" ");
+                    jTextField1.setText("");
                 }
                 jTextField1.setForeground(Color.black);
             }
@@ -45,13 +46,25 @@ public class MainPage extends javax.swing.JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (jTextField2.getText().equals("Ingresar Numero De Cliente")) {
-                    jTextField2.setText(" ");
+                    jTextField2.setText("");
                 }
                 jTextField2.setForeground(Color.black);
             }
 
         });
+        
+        
+        
     }
+    
+    public String matricula(){
+    String z;
+    z=jTextField1.getText();
+    return z;
+    }
+    
+    
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -282,7 +295,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        Pagos payment = new Pagos();
+        
 
 
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -306,8 +319,7 @@ public class MainPage extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         MostrarCliente show = new MostrarCliente();
         show.setVisible(true);
-        
-       
+        //System.out.println(this.matricula());
     }//GEN-LAST:event_jButton7ActionPerformed
 
     /**

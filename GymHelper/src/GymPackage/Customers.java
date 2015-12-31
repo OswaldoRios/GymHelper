@@ -48,7 +48,7 @@ public class Customers {
             String f, String g, int h, String i, String j) {
 
         int m;
-       
+
         try {
 
             ConnectionPack.ConnectionClass miconexion = new ConnectionPack.ConnectionClass();
@@ -57,7 +57,7 @@ public class Customers {
             rs = st.executeQuery("select max(matricula) from clientes where matricula >0");
             rs.next();
             System.out.println(rs.getInt(1));
-            m = rs.getInt(1)+1;
+            m = rs.getInt(1) + 1;
 
             String script = "insert into clientes values (?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement psta = conn.prepareStatement(script);
@@ -76,12 +76,16 @@ public class Customers {
             psta.close();
 
             JOptionPane.showMessageDialog(null, "El cliente fue agregado correctamente!");
-            
+            JOptionPane.showMessageDialog(null, "Su matricula es " + m);
+
         } catch (Exception x) {
             System.out.println(x.getCause());
             System.out.println("It didnt work");
         }
 
     }
+
+   
+    
 
 }
