@@ -13,8 +13,8 @@ public class ConnectionClass {
     static ResultSet rs = null;
 
     
-    static String usrname = "hr";
-    static String password = "hr";
+    static String usrname = "gym";
+    static String password = "gym";
     static String url = "jdbc:oracle:thin:@localhost:1521:xe";
 
     public static Connection Enlace(Connection conn) throws SQLException {
