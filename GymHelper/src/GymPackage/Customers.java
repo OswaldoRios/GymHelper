@@ -11,6 +11,8 @@ import static GymPackage.MainPage.conn;
 import static GymPackage.NewCustomer.rs;
 import static GymPackage.NewCustomer.st;
 import java.sql.PreparedStatement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,9 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class Customers {
 
-    public Customers() {
-
-    }
+    public int m;
 
     public void BorrarCliente() {
 
@@ -47,8 +47,10 @@ public class Customers {
     public void ClienteNuevo(String a, String b, String c, String d, String e,
             String f, String g, int h, String i, String j) {
 
-        int m;
-
+       
+        Date date = new Date();
+        SimpleDateFormat sd = new SimpleDateFormat("MMM dd yyyy");
+        String timeStamp = sd.format(date);
         try {
 
             ConnectionPack.ConnectionClass miconexion = new ConnectionPack.ConnectionClass();
@@ -77,15 +79,31 @@ public class Customers {
 
             JOptionPane.showMessageDialog(null, "El cliente fue agregado correctamente!");
             JOptionPane.showMessageDialog(null, "Su matricula es " + m);
+            
+            st = sta(st);
+            rs = st.executeQuery("select * from clientes where matricula =" + m);
+            rs.next();
+            rs.getString(1); //First Name
+            rs.getString(3); //Last Name
+            rs.getInt(11);   //Matricula
+            
+                                    
+            String script2 = ("insert into visitas values (?,?,?,?,?)");
+            PreparedStatement psta2 = conn.prepareStatement(script2);
+            psta2.setInt(1, rs.getInt(11));
+            psta2.setString(2, rs.getString(1));
+            psta2.setString(3, rs.getString(3));
+            psta2.setString(4, timeStamp);
+            psta2.setInt(5, 1);
+            psta2.execute();
+            psta2.close();
+            System.out.println(timeStamp);
+            
 
         } catch (Exception x) {
-            System.out.println(x.getCause());
             System.out.println("It didnt work");
         }
-
+       
     }
-
-   
-    
 
 }

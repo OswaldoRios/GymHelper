@@ -8,6 +8,9 @@ package GymPackage;
 import static ConnectionPack.ConnectionClass.sta;
 import static GymPackage.NewCustomer.rs;
 import static GymPackage.NewCustomer.st;
+import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -22,13 +25,12 @@ public class MostrarCliente extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(getParent());
-        int m=12;
-        MainPage main = new MainPage();
-        System.out.println(main.matricula());
+        String m =JOptionPane.showInputDialog("Ingrese la matricula que desea buscar");
+        
     try {
 
             st = sta(st);
-            rs = st.executeQuery("SELECT * FROM clientes WHERE matricula="+m);
+            rs = st.executeQuery("SELECT * FROM clientes WHERE matricula="+ m);
             rs.next();
             jLabel8.setText(rs.getString(1)+" "+rs.getString(2));
             jLabel9.setText(rs.getString(3)+" "+rs.getString(4));
@@ -39,7 +41,7 @@ public class MostrarCliente extends javax.swing.JFrame {
             jLabel14.setText(rs.getString(9));
             jLabel16.setText(rs.getString(10));
             jLabel21.setText(rs.getString(11));
-            
+            jLabel2.setText(m);
         } catch (Exception x) {
             System.out.println("It didnt work");
         }
@@ -82,6 +84,8 @@ public class MostrarCliente extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(623, 313));
@@ -157,6 +161,11 @@ public class MostrarCliente extends javax.swing.JFrame {
 
         jLabel21.setText("jLabel21");
 
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel22.setText("Veces Visitado:");
+
+        jLabel26.setText("jLabel26");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -164,9 +173,9 @@ public class MostrarCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(220, 220, 220)
+                        .addGap(232, 232, 232)
                         .addComponent(jLabel1)
-                        .addGap(4, 4, 4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(118, 118, 118)
@@ -200,7 +209,8 @@ public class MostrarCliente extends javax.swing.JFrame {
                             .addComponent(jLabel13)
                             .addComponent(jLabel7)
                             .addComponent(jLabel24)
-                            .addComponent(jLabel25))
+                            .addComponent(jLabel25)
+                            .addComponent(jLabel22))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -212,14 +222,15 @@ public class MostrarCliente extends javax.swing.JFrame {
                             .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel23)
-                            .addComponent(jLabel21))))
+                            .addComponent(jLabel21)
+                            .addComponent(jLabel26))))
                 .addGap(170, 170, 170))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
                 .addGap(11, 11, 11)
@@ -268,8 +279,13 @@ public class MostrarCliente extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel20)
                         .addComponent(jLabel19)))
-                .addGap(11, 11, 11)
-                .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(jLabel26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         pack();
@@ -331,9 +347,11 @@ public class MostrarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

@@ -5,16 +5,13 @@
  */
 package GymPackage;
 
-import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -24,7 +21,6 @@ public class MainPage extends javax.swing.JFrame {
         static Connection conn = null;
         static Statement st = null;
         static ResultSet rs = null;
-        public String M;
 
     public MainPage() {
         initComponents();
@@ -32,7 +28,7 @@ public class MainPage extends javax.swing.JFrame {
         this.setLocationRelativeTo(getParent());
         
 
-        jTextField1.addMouseListener(new MouseAdapter() {
+      /*  jTextField1.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (jTextField1.getText().equals("Ingresar Numero De Cliente")) {
@@ -51,16 +47,12 @@ public class MainPage extends javax.swing.JFrame {
                 jTextField2.setForeground(Color.black);
             }
 
-        });
-        
-        
+        });*/
         
     }
-    
     public String matricula(){
-    String z;
-    z=jTextField1.getText();
-    return z;
+    String n=jTextField1.getText();
+    return n;
     }
     
     
@@ -295,8 +287,14 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        
-
+           try{
+            Visitas vist = new Visitas();
+           int a= Integer.parseInt(jTextField1.getText());
+           vist.visitas(a);
+            } catch (Exception x) {
+               JOptionPane.showMessageDialog(this,"No se a ingresado una matricula valida");
+        }
+           
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -310,6 +308,7 @@ public class MainPage extends javax.swing.JFrame {
         NewCustomer newcust = new NewCustomer();
         newcust.setVisible(true);
         
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -319,7 +318,6 @@ public class MainPage extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         MostrarCliente show = new MostrarCliente();
         show.setVisible(true);
-        //System.out.println(this.matricula());
     }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
