@@ -10,7 +10,9 @@ import static ConnectionPack.ConnectionClass.sta;
 import static GymPackage.MainPage.conn;
 import static GymPackage.NewCustomer.rs;
 import static GymPackage.NewCustomer.st;
+import java.awt.HeadlessException;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -21,67 +23,106 @@ import javax.swing.JOptionPane;
  */
 public class Customers {
 
-    public int m;
+   static public String matri; 
+    
+    public void EditCliente(String a, String b, String c, String d, String e,
+            String f, String g, String h, String i, String j)
+    {   
+        
+        
+         //String m = JOptionPane.showInputDialog(null);
+        
+        try {
+            
+            ConnectionPack.ConnectionClass miconexion = new ConnectionPack.ConnectionClass();
+            conn = ConnectionClass.Enlace(conn);
+            
+            rs = st.executeQuery("SELECT * FROM clientes WHERE Id_cliente="+ Customers.matri);
+            rs.next();
+            // System.out.println("The id: is "+rs.getString(1));
+           
+            String script = ("UPDATE clientes SET Nombre1_cliente = ?, Nombre2_cliente = ?, Apellido1_cliente = ?, Apellido2_cliente = ?, Direccion = ?, Ciudad = ?, Estado = ?, Codigo_Postal = ?, Tel1 = ?, Tel2 = ? WHERE id_cliente="+Customers.matri);
+            
+                PreparedStatement psta = conn.prepareStatement(script); 
+            
+                psta.setString(1, a);
+                psta.setString(2, b);
+                psta.setString(3, c);
+                psta.setString(4, d);
+                psta.setString(5, e);
+                psta.setString(6, f);
+                psta.setString(7, g);
+                psta.setString(8, h);
+                psta.setString(9, i);
+                psta.setString(10, j);
+               
+               
+                psta.execute();
+                psta.close();
 
+            JOptionPane.showMessageDialog(null, "Se actualizo la informacion exitosamente!");
+           
+        } catch (Exception x) {
+            System.out.println("It didnt work");
+        }
+      }
+    
     public void BorrarCliente() {
 
-        /*   int a;
-         a=Integer.parseInt(JOptionPane.showInputDialog("Ingrese ID del contacto que quiere borrar"));
          try {
             
-         ConnectionPack.ConnectionClass miconexion = new ConnectionPack.ConnectionClass();
-         conn = ConnectionClass.Enlace(conn);
-         String sqlinsertar = "delete from CLIENTE WHERE id_cliente = ?";
-         PreparedStatement psta = conn.prepareStatement(sqlinsertar);
-         psta.setInt(1, a);
-         psta.execute();
-         psta.close();
-         JOptionPane.showMessageDialog(null, "Registro Modificado Borrado");
-         } catch (Exception e) {
-         System.out.println(e.getCause());
-         }
-      
-         */
+            String script = ("DELETE FROM clientes WHERE id_cliente="+Customers.matri);
+            
+            
+            PreparedStatement psta = conn.prepareStatement(script); 
+            
+                psta.execute();
+                psta.close();
+
+            JOptionPane.showMessageDialog(null, "Se elimino el cliente exitosamente!");
+            
+        } catch (Exception x) {
+            System.out.println("It didnt work");
+        }
     }
 
     public void ClienteNuevo(String a, String b, String c, String d, String e,
-            String f, String g, int h, String i, String j) {
+            String f, String g, String h, String i, String j) {
 
-       
-        Date date = new Date();
-        SimpleDateFormat sd = new SimpleDateFormat("MMM dd yyyy");
-        String timeStamp = sd.format(date);
+       int m;
+      
         try {
 
             ConnectionPack.ConnectionClass miconexion = new ConnectionPack.ConnectionClass();
             conn = ConnectionClass.Enlace(conn);
             st = sta(st);
-            rs = st.executeQuery("select max(matricula) from clientes where matricula >0");
+            rs = st.executeQuery("select max(Id_cliente) from clientes where Id_cliente >0");
             rs.next();
             System.out.println(rs.getInt(1));
-            m = rs.getInt(1) + 1;
+            m = rs.getInt(1)+1;
 
             String script = "insert into clientes values (?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement psta = conn.prepareStatement(script);
-            psta.setString(1, a);
-            psta.setString(2, b);
-            psta.setString(3, c);
-            psta.setString(4, d);
-            psta.setString(5, e);
-            psta.setString(6, f);
-            psta.setString(7, g);
-            psta.setInt(8, h);
-            psta.setString(9, i);
-            psta.setString(10, j);
-            psta.setInt(11, m);
+            psta.setInt(1, m);
+            psta.setString(2, a);
+            psta.setString(3, b);
+            psta.setString(4, c);
+            psta.setString(5, d);
+            psta.setString(6, e);
+            psta.setString(7, f);
+            psta.setString(8, g);
+            psta.setString(9, h);
+            psta.setString(10, i);
+            psta.setString(11, j);
+            
             psta.execute();
             psta.close();
 
             JOptionPane.showMessageDialog(null, "El cliente fue agregado correctamente!");
             JOptionPane.showMessageDialog(null, "Su matricula es " + m);
-            
+            /* Aqui se pueden almacenar visitas pero no lo usaremos
             st = sta(st);
-            rs = st.executeQuery("select * from clientes where matricula =" + m);
+            rs = st.executeQuery("select * from clientes where Id_cliente =" + m);
             rs.next();
             rs.getString(1); //First Name
             rs.getString(3); //Last Name
@@ -98,7 +139,7 @@ public class Customers {
             psta2.execute();
             psta2.close();
             System.out.println(timeStamp);
-            
+          */  
 
         } catch (Exception x) {
             System.out.println("It didnt work");

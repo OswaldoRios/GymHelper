@@ -67,6 +67,7 @@ public class NewCustomer extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 102));
         jLabel1.setText("Agregar Un Cliente Nuevo");
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -127,6 +128,7 @@ public class NewCustomer extends javax.swing.JFrame {
         jLabel10.setText("Telefono 2");
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 102));
         jButton1.setText("Registrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,6 +138,7 @@ public class NewCustomer extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(222, 52, 52));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 0, 102));
         jButton2.setText("Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,11 +265,7 @@ public class NewCustomer extends javax.swing.JFrame {
         String u = jTextField5.getText();
         String f = jTextField6.getText();
         String g = jTextField7.getText();
-        int h;
-         if(jTextField8.getText().equals(""))
-         h= 99999;
-        else
-         h = Integer.parseInt(jTextField8.getText());
+        String h = jTextField8.getText();
         String i = jTextField9.getText();
         String j = jTextField10.getText();
         Customers custs = new Customers();
