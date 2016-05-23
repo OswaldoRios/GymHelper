@@ -43,10 +43,11 @@ public class Pagos {
 }
     
     
-
+        public String id;
+        public int flag=0;
     public void Pago() {
-        String id;
-
+        
+       
         try {
 
             id = JOptionPane.showInputDialog("Ingrese la matricula del cliente que hara el pago");
@@ -54,7 +55,13 @@ public class Pagos {
             rs = st.executeQuery("SELECT Nombre1_cliente from clientes WHERE Id_cliente = " + id);
             rs.next();
             rs.getString(1);
-     
+            
+        }
+            catch (Exception x) {
+            JOptionPane.showMessageDialog(null, "Error:Ese numero de cliente no existe");
+            flag=1;
+        }
+           try { 
          java.util.Date now = new java.util.Date(System.currentTimeMillis());
                
                
@@ -79,8 +86,9 @@ public class Pagos {
             psta.close();
             JOptionPane.showMessageDialog(null, "Se realizo el pago exitosamente!");
         } catch (Exception x) {
-            JOptionPane.showMessageDialog(null, "error");
-
+            if(flag==0)
+            JOptionPane.showMessageDialog(null, "Error: No se ingreso un monto valido");
+           
         }
 
         /*
