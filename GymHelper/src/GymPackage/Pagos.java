@@ -15,6 +15,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
 
 /**
  *
@@ -36,11 +38,9 @@ import oracle.security.o5logon.b;
 public class Pagos {
 
     private static java.sql.Date getCurrentDate() {
-       
-        java.util.Date today = new java.util.Date();
-        return new java.sql.Date(today.getTime());
-
-    }
+    java.util.Date today = new java.util.Date();
+    return new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+}
     
     
 
@@ -54,30 +54,30 @@ public class Pagos {
             rs = st.executeQuery("SELECT Nombre1_cliente from clientes WHERE Id_cliente = " + id);
             rs.next();
             rs.getString(1);
-
-         DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yy");
-         Date date = new Date();
-         System.out.println(dateFormat.format(date)); //2014/08/06 15:59:48
-            
+     
+         java.util.Date now = new java.util.Date(System.currentTimeMillis());
                
                
             String monto = JOptionPane.showInputDialog("De cuanto sera el pago de " + rs.getString(1) + "?");
 
-            rs = st.executeQuery("select count(id_cliente) from pagos where id_cliente = " + id);
+            rs = st.executeQuery("select count(ID_PAGOS) from Pagos");
             rs.next();
             int ID_Pago = rs.getInt(1) + 1;
 
-            String script = "INSERT INTO pagos values(?,?,TO_DATE(?,  'YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"'),?)";
+            String script = "INSERT INTO pagos values(?,?,?,?)";
             PreparedStatement psta = conn.prepareStatement(script);
             psta.setInt(1, ID_Pago);
             psta.setFloat(2, Float.parseFloat(monto));
-            psta.setString(3, dateFormat.format(date));
+            psta.setDate(3, new java.sql.Date((new Date(System.currentTimeMillis())).getTime()));
             psta.setString(4, id);
-            JOptionPane.showMessageDialog(null, "Se realizo el pago exitosamente!");
+            
             System.out.println(ID_Pago);
             System.out.println(Float.parseFloat(monto));
-            System.out.println(dateFormat.format(date));
+            System.out.println(new java.sql.Date((new Date(System.currentTimeMillis())).getTime()));
             System.out.println(id);
+            psta.execute();
+            psta.close();
+            JOptionPane.showMessageDialog(null, "Se realizo el pago exitosamente!");
         } catch (Exception x) {
             JOptionPane.showMessageDialog(null, "error");
 
