@@ -45,6 +45,8 @@ public class Pagos {
     
         public String id;
         public int flag=0;
+        public int flag2=0;
+        public int flag3=0;
     public void Pago() {
         
        
@@ -85,57 +87,74 @@ public class Pagos {
             psta.execute();
             psta.close();
             JOptionPane.showMessageDialog(null, "Se realizo el pago exitosamente!");
+            
         } catch (Exception x) {
             if(flag==0)
             JOptionPane.showMessageDialog(null, "Error: No se ingreso un monto valido");
-           
+             flag=1;
         }
-
-        /*
-         if (!MainPage.ID.isEmpty())
-         {
-         String confirm = JOptionPane.showInputDialog("Cuanto desea pagar el cliente?");
+           //Aqui se agregara lo de las membresias
+      if(flag==0)
+      {  try {
+              rs = st.executeQuery("select max(FECHA_PAGO) from Pagos where ID_Cliente ="+id);
+              rs.next();
+              Date ultimo_pago = rs.getDate(1);
+              System.out.println(ultimo_pago);
+        }
+            catch (Exception x) {
             
-          
-          
-         try {
-                  
-         System.out.println(ID_Pago);
-         } catch (SQLException ex) {
-         Logger.getLogger(Pagos.class.getName()).log(Level.SEVERE, null, ex);
-         }
-               
-         try {
-         String script = ("");
-         PreparedStatement psta = conn.prepareStatement(script); 
-         psta.setString(1, a);
-         } catch (SQLException ex) {
-         Logger.getLogger(Pagos.class.getName()).log(Level.SEVERE, null, ex);
-         }
-          
-         //String d= "to_date('"+getCurrentDate()+"','yyyy,mm,dd'";
-          
-         try{
-          
-         System.out.println(getCurrentDate());
-           
-         System.out.println(getCurrentDate());
-           
-         psta.setDate(2, java.sql.Date.valueOf(LocalDate.MIN));
-         psta.setDouble(3, c);
-         psta.execute();
-         psta.close(); 
-           
-         }
-         catch(Exception e)
-         {
-         System.out.println("It didnt work ");
-         }
-        
-         }
-         else
-         {JOptionPane.showMessageDialog(null,"Por favor indique que cliente realizara el pago");}
-         */
+        }
+       
+        try {
+              rs = st.executeQuery("select vencimiento from membresias join pagos using "
+                      + "(ID_Cliente) where ID_CLIENTE ="+id);
+              rs.next();
+              Date test= rs.getDate(1);
+                 flag3=1;
+                System.out.println("Membresia existente");
+        }
+            catch (Exception x) {
+                System.out.println("No existe membresia aun");
+                flag2=1;
+              
+        }
+            if(flag2==1)
+            {
+        try {
+              String script = "INSERT INTO membresias values(?,?,ADD_MONTHS(sysdate,1))";
+            PreparedStatement psta = conn.prepareStatement(script);
+            psta.setInt(1, Integer.parseInt(id));
+            psta.setBoolean(2, true);
+            //psta.setDate(3, new java.sql.Date((new Date(System.currentTimeMillis())).getTime()));
+            psta.execute();
+            psta.close();
+            System.out.println("Se agrego la membresia exitosamente");
+        }
+            catch (Exception x) {
+                System.out.println("Error creating membership");
+                
+        }
+            }
+            if(flag3==1)
+            {
+        try {
+            
+            String script = "Update membresias set vencimiento = "
+                    + "ADD_MONTHS(vencimiento,1) where ID_Cliente ="+id;
+            PreparedStatement psta = conn.prepareStatement(script);
+            psta.execute();
+            psta.close();
+            System.out.println("Se le agrego un mes de membresia");
+        }
+            catch (Exception x) {
+                System.out.println("Error creating membership");
+                
+        }
+            }
+      
+      
+      
+      }   
     }
 
 }
