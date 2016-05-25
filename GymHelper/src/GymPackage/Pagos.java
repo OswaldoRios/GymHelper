@@ -115,7 +115,7 @@ public class Pagos {
             if(flag2==1)
             {
         try {
-              String script = "INSERT INTO membresias values(?,?,ADD_MONTHS(sysdate,-5))";
+              String script = "INSERT INTO membresias values(?,?,ADD_MONTHS(sysdate,1))";
             PreparedStatement psta = conn.prepareStatement(script);
             psta.setInt(1, Integer.parseInt(id));
             psta.setBoolean(2, true);
