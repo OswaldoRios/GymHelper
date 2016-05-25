@@ -47,6 +47,8 @@ public class Pagos {
         public int flag=0;
         public int flag2=0;
         public int flag3=0;
+        
+        
     public void Pago() {
         
        
@@ -95,15 +97,7 @@ public class Pagos {
         }
            //Aqui se agregara lo de las membresias
       if(flag==0)
-      {  try {
-              rs = st.executeQuery("select max(FECHA_PAGO) from Pagos where ID_Cliente ="+id);
-              rs.next();
-              Date ultimo_pago = rs.getDate(1);
-              System.out.println(ultimo_pago);
-        }
-            catch (Exception x) {
-            
-        }
+      {  
        
         try {
               rs = st.executeQuery("select vencimiento from membresias join pagos using "
@@ -121,7 +115,7 @@ public class Pagos {
             if(flag2==1)
             {
         try {
-              String script = "INSERT INTO membresias values(?,?,ADD_MONTHS(sysdate,1))";
+              String script = "INSERT INTO membresias values(?,?,ADD_MONTHS(sysdate,-5))";
             PreparedStatement psta = conn.prepareStatement(script);
             psta.setInt(1, Integer.parseInt(id));
             psta.setBoolean(2, true);
