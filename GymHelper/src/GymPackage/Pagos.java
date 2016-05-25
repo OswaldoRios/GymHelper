@@ -69,7 +69,7 @@ public class Pagos {
          java.util.Date now = new java.util.Date(System.currentTimeMillis());
                
                
-            String monto = JOptionPane.showInputDialog("De cuanto sera el pago de " + rs.getString(1) + "?");
+            String monto = JOptionPane.showInputDialog("Ingrese el costo de membresia para " + rs.getString(1) + "?");
 
             rs = st.executeQuery("select count(ID_PAGOS) from Pagos");
             rs.next();
